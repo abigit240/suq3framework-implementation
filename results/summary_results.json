@@ -1,0 +1,34 @@
+[
+    {
+        "Stage":"Baseline",
+        "Size (KB)":61.2109375,
+        "Sparsity":0.0,
+        "Accuracy":0.9621212121,
+        "F1":0.9618952918,
+        "Latency (ms)":"-"
+    },
+    {
+        "Stage":"Stage 1 (Structured)",
+        "Size (KB)":61.2109375,
+        "Sparsity":0.0,
+        "Accuracy":0.9696969697,
+        "F1":0.9695829072,
+        "Latency (ms)":"-"
+    },
+    {
+        "Stage":"Stage 2 (Unstructured)",
+        "Size (KB)":61.2109375,
+        "Sparsity":0.5208337748,
+        "Accuracy":0.5454545455,
+        "F1":0.4824659731,
+        "Latency (ms)":"-"
+    },
+    {
+        "Stage":"Stage 3 (QAT+TFLite)",
+        "Size (KB)":61.2109375,
+        "Sparsity":0.0203574204,
+        "Accuracy":0.9848484848,
+        "F1":0.9848221344,
+        "Latency (ms)":"0.3029"
+    }
+]

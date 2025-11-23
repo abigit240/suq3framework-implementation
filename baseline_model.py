@@ -66,6 +66,11 @@ class BaselineModel:
             ],
             verbose=1
         )
+        # Save history
+        import json, os
+        os.makedirs('./results/histories/', exist_ok=True)
+        with open(f'./results/histories/{"Baseline"}.json', 'w') as f:
+            json.dump(history.history, f)
         return history
     
     def save(self, path):

@@ -64,26 +64,41 @@ class QuantizationAwareTraining:
             ],
             verbose=1
         )
+        # Save history
+        import json, os
+        os.makedirs('./results/histories/', exist_ok=True)
+        with open(f'./results/histories/{"Stage 3 (QAT+TFLite)"}.json', 'w') as f:
+            json.dump(history.history, f)
         return history
     
     def convert_to_tflite(self, output_path='models/suq3_int8.tflite'):
-        """Convert model to TFLite INT8 format"""
+        """Convert model to TFLite INT8 format, supporting GRU dynamic ops"""
         representative_gen = self.prepare_representative_dataset()
-        
+    
         converter = tf.lite.TFLiteConverter.from_keras_model(self.qat_model)
         converter.optimizations = [tf.lite.Optimize.DEFAULT]
         converter.representative_dataset = representative_gen
-        converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
+    
+        # Use SELECT_TF_OPS to support dynamic TensorArray ops from GRU
+        converter.target_spec.supported_ops = [
+        tf.lite.OpsSet.TFLITE_BUILTINS_INT8,  # native int8 ops
+        tf.lite.OpsSet.SELECT_TF_OPS          # allow TF ops not natively supported
+        ]
+    
+        # Disable lowering that fails for dynamic tensor lists
+        converter._experimental_lower_tensor_list_ops = False
+    
         converter.inference_input_type = tf.int8
         converter.inference_output_type = tf.int8
-        
+    
         self.tflite_model = converter.convert()
-        
+    
         with open(output_path, 'wb') as f:
             f.write(self.tflite_model)
-        
+    
         print(f"TFLite INT8 model saved to {output_path}")
         return output_path
+
     
     def benchmark_tflite(self, tflite_path, X_test, num_runs=200):
         """Benchmark TFLite model latency"""

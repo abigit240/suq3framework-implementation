@@ -56,13 +56,15 @@ class StructuredPruning:
         x = layers.GRU(config.GRU_UNITS)(x)
         
         # Wrap Dense layers with pruning
+        # Wrap Dense layers with pruning
         dense_1 = layers.Dense(config.DENSE_1_UNITS, activation='relu', name='dense_1')
-        dense_1_wrapped = tfmot.sparsity.keras.PruneLowMagnitude(dense_1, **pruning_params)
+        dense_1_wrapped = tfmot.sparsity.keras.prune_low_magnitude(dense_1, **pruning_params)
         x = dense_1_wrapped(x)
-        
+
         dense_2 = layers.Dense(config.N_CLASSES, activation='softmax', name='dense_2')
-        dense_2_wrapped = tfmot.sparsity.keras.PruneLowMagnitude(dense_2, **pruning_params)
+        dense_2_wrapped = tfmot.sparsity.keras.prune_low_magnitude(dense_2, **pruning_params)
         outputs = dense_2_wrapped(x)
+
         
         self.model = keras.Model(inputs=inputs, outputs=outputs)
         
@@ -94,6 +96,11 @@ class StructuredPruning:
             ],
             verbose=1
         )
+        # Save history
+        import json, os
+        os.makedirs('./results/histories/', exist_ok=True)
+        with open(f'./results/histories/{"Stage 1 (Structured)"}.json', 'w') as f:
+            json.dump(history.history, f)
         return history
     
     def strip_pruning(self):
