@@ -2,18 +2,7 @@
 
 A complete Python implementation of the SUQ-3 (Structured → Unstructured → Quantization) compression pipeline for agricultural dataset classification on edge devices. SUQ-3 is a framework given by researchers by Vaiyapuri et al https://www.mdpi.com/2071-1050/17/12/5230
 
-## Project Structure
-suq3framework-implementation/
-├── config.py # Configuration settings
-├── data_loader.py # Dataset loading and preprocessing 
-├── baseline_model.py # Baseline model architecture
-├── pruning_stage1.py # Stage 1: Structured Pruning 
-├── pruning_stage2.py # Stage 2: Unstructured Pruning 
-├── quantization_stage3.py # Stage 3: QAT & TFLite Export
-├── utils.py # Utility functions 
-├── main.py # Pipeline orchestration 
-├── requirements.txt # Dependencies 
-└── README.md # This file
+loss plots[figure-1]
 
 ## Compression Pipeline
 
