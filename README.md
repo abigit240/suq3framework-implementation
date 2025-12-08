@@ -2,7 +2,7 @@
 
 A complete Python implementation of the SUQ-3 (Structured → Unstructured → Quantization) compression pipeline for agricultural dataset classification on edge devices. SUQ-3 is a framework given by researchers by Vaiyapuri et al https://www.mdpi.com/2071-1050/17/12/5230
 
-loss plots[figure-1]
+[loss plots](results/loss_curves_4_stages.png)
 
 ## Compression Pipeline
 
