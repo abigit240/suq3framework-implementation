@@ -1,7 +1,8 @@
 # SUQ-3 Framework Implementation (Building and compressing a Deep RNN based model)
 
 A complete **Tensorflow** implementation of the SUQ-3 (Structured → Unstructured → Quantization), a 3-stage compression pipeline for Recurrent Neural Network (RNN) based AI model for agricultural dataset classification on edge devices. SUQ-3 is a framework given by researchers by Vaiyapuri et al https://www.mdpi.com/2071-1050/17/12/5230
-In the first step a baseline Gated Recurrent Unit (GRU) based deep NN model to predict crop based upon available dataset. In sub-sequent stages the developed model is compressed via structural pruning, unstructured pruning and quantization. Lastly, the model is converted to tensorflowlite for edge deployment.
+
+In the first step a baseline **Gated Recurrent Unit (GRU) based deep NN model** is built to suggest crop based upon available dataset (soil and environmental data). In sub-sequent stages the developed model is compressed via **structural pruning, unstructured pruning and quantization**. Lastly, the model is converted to tensorflowlite for edge deployment.
 
 # Application
 The work has high significance in precision agriculture in specific and edge AI in general. Pruning and quantization are current research domains in modern AI democratization and edge AI.
